@@ -1,0 +1,2 @@
+FROM edgedb/edgedb
+COPY ./dbschema /dbschema

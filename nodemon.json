@@ -1,0 +1,15 @@
+{
+	"watch": [
+		"src",
+		".env.example",
+		".env.default",
+		".env",
+		".env.development.default",
+		".env.development",
+		"package.json",
+		"tsconfig.json",
+		"tsconfig.development.json"
+	],
+	"ext": "ts,json",
+	"exec": "NODE_ENV=development ts-node -r tsconfig-paths/register --project tsconfig.development.json src/main.ts"
+}

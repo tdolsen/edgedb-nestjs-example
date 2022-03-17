@@ -1,0 +1,11 @@
+FROM node:17.6 as builder
+WORKDIR /build
+COPY . .
+RUN yarn install
+RUN yarn run build
+
+FROM node:17.6-alpine as output
+WORKDIR /app
+COPY --from=builder /build .
+EXPOSE 3000
+CMD ["node", "dist/main.js"]

@@ -1,0 +1,13 @@
+# no lock files
+yarn.lock
+
+# logfiles and such
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# none source folders
+**/dist
+**/node_modules
+**/.vscode
+**/playground

@@ -1,0 +1,33 @@
+version: "3"
+
+services:
+  api:
+    depends_on:
+      - edgedb
+    build:
+      context: .
+      dockerfile: Dockerfile.api
+    environment:
+      EDGEDB_DSN: "edgedb://edgedb:password@edgedb:5656/edgedb"
+      EDGEDB_TLS_CA_FILE: "/dbdata/edbtlscert.pem"
+    networks:
+      - edgedb
+    volumes:
+      - "./dbdata:/dbdata"
+    ports:
+      - "3333:3000"
+  edgedb:
+    build:
+      context: .
+      dockerfile: Dockerfile.edgedb
+    environment:
+      EDGEDB_SERVER_DATADIR: "/dbdata"
+      EDGEDB_SERVER_PASSWORD: "password"
+      EDGEDB_SERVER_TLS_CERT_MODE: "generate_self_signed"
+    networks:
+      - edgedb
+    volumes:
+      - "./dbdata:/dbdata"
+
+networks:
+  edgedb:
