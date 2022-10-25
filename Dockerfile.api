@@ -1,10 +1,10 @@
-FROM node:17.6 as builder
+FROM node:18 as builder
 WORKDIR /build
 COPY . .
 RUN yarn install
 RUN yarn run build
 
-FROM node:17.6-alpine as output
+FROM node:18-alpine as output
 WORKDIR /app
 COPY --from=builder /build .
 EXPOSE 3000

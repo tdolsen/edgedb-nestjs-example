@@ -1,7 +1,6 @@
 import { OnModuleInit } from "@nestjs/common";
-import { createClient } from "edgedb";
-import { Expression } from "edgedb/dist/reflection";
-import { $infer } from "~/edgeql";
+import { $infer, createClient } from "~/edgeql";
+import * as T from "~/edgeql/typesystem";
 
 export class EdgeDBService implements OnModuleInit {
 	client = createClient();
@@ -10,7 +9,7 @@ export class EdgeDBService implements OnModuleInit {
 		await this.client.ensureConnected();
 	}
 
-	public async query<Expr extends Expression, R = $infer<Expr>>(expression: Expr): Promise<R> {
-		return expression.run(this.client);
+	public async query<Expr extends T.Expression>(expression: Expr): Promise<$infer<Expr>> {
+		return await expression.run(this.client);
 	}
 }

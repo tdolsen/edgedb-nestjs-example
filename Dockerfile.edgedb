@@ -1,2 +1,2 @@
-FROM edgedb/edgedb
+FROM edgedb/edgedb:2
 COPY ./dbschema /dbschema
